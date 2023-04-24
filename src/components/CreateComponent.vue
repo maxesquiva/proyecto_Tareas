@@ -1,12 +1,12 @@
 <template>
-  <h3>create task</h3>
+
 
 
   <form method="POST" v-on:submit.prevent="saveTask()">
     <div>
       <input type="text" v-model="task" placeholder="Nueva tarea" name="todo">
       <input type="text" v-model="description" placeholder="descripcion" name="todo">
-      <input type="submit" value="Agregar" color="success" />
+      <input type="submit" value="Agregar" color="success" class="botonAgregar primary"/>
     </div>
   </form>
 
@@ -57,6 +57,16 @@
 </template>
 
   
+
+<style>
+  .primary{
+    color:#5f1313;
+  }
+</style>
+
+
+
+
 <script>
 //   import SvgIcon from '@jamescoyle/vue-icon';
 //   import { mdiAccount } from '@mdi/js';
@@ -96,7 +106,9 @@ export default {
         .then(response => {
           console.log(response),
             this.getTasks();
-          this.$router.push('/')
+            this.show = false;
+            window.location.reload()
+          // this.$router.push('/')
         })
         .catch(error => { console.log(error.response) })
       this.task = ''
@@ -129,3 +141,4 @@ export default {
   }
 }
 </script>
+
