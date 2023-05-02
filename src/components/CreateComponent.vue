@@ -1,4 +1,54 @@
 <template>
+  <form method="POST" v-on:submit.prevent="store.saveTask(store.id)">
+    <div>
+      <input type="text" v-model="store.task" placeholder="Nueva tarea" name="todo">
+      <input type="text" v-model="store.description" placeholder="descripcion" name="todo">
+      <input type="submit" value="Agregar" color="success" class="botonAgregar primary" />
+    </div>
+  </form>
+</template>
+
+<script >
+import { onMounted } from 'vue';
+import { useTaskStore } from '../stores/taskStore';
+import { mdiDelete } from '@mdi/js';
+import { mdiPencil } from '@mdi/js';
+
+export default {
+  name: "my-component",
+  components: {
+  },
+  data() {
+    return {
+      path: mdiDelete,
+      pencil: mdiPencil,
+    }
+  },
+  onMounted() {
+    console.log("asd");
+  },
+
+  setup() {
+    const store = useTaskStore();
+    store.saveTask()
+
+    onMounted(() => {
+      //store.getTasks();
+    })
+
+    return {
+      store,
+    }
+  }
+}
+</script>
+
+
+
+
+
+
+<!-- <template>
 
 
 
@@ -8,7 +58,7 @@
       <input type="text" v-model="description" placeholder="descripcion" name="todo">
       <input type="submit" value="Agregar" color="success" class="botonAgregar primary"/>
     </div>
-  </form>
+  </form> -->
 
   <!-- <v-table>
     <thead>
@@ -54,7 +104,7 @@
       </tr>
     </tbody>
   </v-table> -->
-</template>
+<!-- </template>
 
   
 
@@ -62,83 +112,83 @@
   .primary{
     color:#5f1313;
   }
-</style>
+</style> -->
 
 
 
 
-<script>
+<!-- <script>
 //   import SvgIcon from '@jamescoyle/vue-icon';
 //   import { mdiAccount } from '@mdi/js';
 // import SvgIcon from '@jamescoyle/vue-icon';
-import { mdiTrashCan } from '@mdi/js';
-import { mdiPencil } from '@mdi/js';
-const url = "http://localhost:8000/api";
-import axios from "axios";
+// import { mdiTrashCan } from '@mdi/js';
+// import { mdiPencil } from '@mdi/js';
+// const url = "http://localhost:8000/api";
+// import axios from "axios";
 
 
-export default {
+// export default {
 
-  name: "my-cool-component",
+//   name: "my-cool-component",
 
-  components: {
-    // SvgIcon
-  },
+//   components: {
+//     // SvgIcon
+//   },
 
-  data() {
-    return {
-      task: '',
-      posts: [],
-      loading: true,
-      path: mdiTrashCan,
-      pencil: mdiPencil,
-      // path: mdiAccount,
-    }
-  },
-  mounted() {
-    this.getTasks();
-    // this.createTask();
-  },
-  methods: {
-    saveTask() {
-      //recarga buena de la pagina
-      axios.post(url+"/tareas/", { title: this.task, description: this.description })
-        .then(response => {
-          console.log(response),
-            this.getTasks();
-            this.show = false;
-            window.location.reload()
-          // this.$router.push('/')
-        })
-        .catch(error => { console.log(error.response) })
-      this.task = ''
-    },
-    getTasks() {
-      try {
-        axios.get(url+"/tareas/").then((response) => {
-          this.posts = response.data.data;
-          this.loading = false;
-          // window.location.reload()
-        })
-      }
-      catch (error) {
-        console.log()
-      }
-    },
-    deleteTasks(id) {
-      axios.delete(url+"/tareas/" + id)
-        .then(response => {
-          console.log(response)
-          this.getTasks();
+//   data() {
+//     return {
+//       task: '',
+//       posts: [],
+//       loading: true,
+//       path: mdiTrashCan,
+//       pencil: mdiPencil,
+//       // path: mdiAccount,
+//     }
+//   },
+//   mounted() {
+//     this.getTasks();
+//     // this.createTask();
+//   },
+//   methods: {
+//     saveTask() {
+//       //recarga buena de la pagina
+//       axios.post(url+"/tareas/", { title: this.task, description: this.description })
+//         .then(response => {
+//           console.log(response),
+//             this.getTasks();
+//             this.show = false;
+//             window.location.reload()
+//           // this.$router.push('/')
+//         })
+//         .catch(error => { console.log(error.response) })
+//       this.task = ''
+//     },
+//     getTasks() {
+//       try {
+//         axios.get(url+"/tareas/").then((response) => {
+//           this.posts = response.data.data;
+//           this.loading = false;
+//           // window.location.reload()
+//         })
+//       }
+//       catch (error) {
+//         console.log()
+//       }
+//     },
+//     deleteTasks(id) {
+//       axios.delete(url+"/tareas/" + id)
+//         .then(response => {
+//           console.log(response)
+//           this.getTasks();
 
-          // this.posts = response.data.data;
-          // this.loading = false;
-        }).catch(error => { console.log(error.respnse) });
-    },
-    created() {
-      this.getTasks();
-    }
-  }
-}
-</script>
+//           // this.posts = response.data.data;
+//           // this.loading = false;
+//         }).catch(error => { console.log(error.respnse) });
+//     },
+//     created() {
+//       this.getTasks();
+//     }
+//   }
+// }
+</script> -->
 
